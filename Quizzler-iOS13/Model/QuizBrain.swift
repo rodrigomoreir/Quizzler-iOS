@@ -25,11 +25,14 @@ struct QuizBrain {
     ]
     
     var questionNumber = 0
+    var score = 0
     
     // temos praticamente 2 tipos de métodos (functions): o simples, que não altera nada sobre a estrutura, e o método mutante (mutating) que pod alterar o estado da estrutura (struct)
     
-    func checkAnswer(_ userAnswer: String) -> Bool {
+    mutating func checkAnswer(_ userAnswer: String) -> Bool {
         if userAnswer == quiz[questionNumber].answer {
+            score += 1
+            getScore()
             return true
         } else {
             return false
@@ -51,6 +54,13 @@ struct QuizBrain {
             questionNumber += 1
         } else {
             questionNumber = 0
+            score = 0
+            getScore()
         }
     }
+    
+    func getScore() -> Int {
+        return score
+    }
+    
 }
